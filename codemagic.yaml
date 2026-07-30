@@ -1,27 +1,55 @@
 workflows:
   android-debug-build:
     name: Share Archive Vault - Debug Build
-    max_build_duration: 30
+    max_build_duration: 60
     instance_type: mac_mini_m2
 
     environment:
       java: 17
 
     scripts:
-      - name: Generate Gradle Wrapper (if missing)
+      - name: Diagnose project structure
         script: |
-          if [ ! -f "gradlew" ]; then
-            echo "gradlew not found — generating via gradle wrapper task..."
-            gradle wrapper --gradle-version 8.6 --distribution-type bin
+          echo "=== Current directory ==="
+          pwd
+          echo ""
+          echo "=== Files at root ==="
+          ls -la
+          echo ""
+          echo "=== Checking for nested folder ==="
+          if [ -d "share-archive-vault" ]; then
+            echo "Found nested share-archive-vault folder — moving into it..."
+            cp -r share-archive-vault/. .
+            echo "Files after copy:"
+            ls -la
           else
-            echo "gradlew already exists."
+            echo "No nested folder. Files are at root — OK."
           fi
 
-      - name: Set gradlew executable permission
-        script: chmod +x gradlew
+      - name: Setup Gradle Wrapper
+        script: |
+          set -e
+          if [ -f "gradlew" ]; then
+            echo "gradlew found!"
+            chmod +x gradlew
+          else
+            echo "gradlew NOT found. Downloading Gradle 8.6 binary directly..."
+            curl -L https://services.gradle.org/distributions/gradle-8.6-bin.zip -o gradle-8.6-bin.zip
+            unzip -q gradle-8.6-bin.zip
+            export GRADLE_HOME=$PWD/gradle-8.6
+            export PATH=$PATH:$GRADLE_HOME/bin
+            echo "Generating wrapper..."
+            gradle wrapper --gradle-version 8.6 --distribution-type bin
+            chmod +x gradlew
+            echo "Wrapper created successfully!"
+          fi
+          echo "=== Gradle version ==="
+          ./gradlew --version
 
-      - name: Build debug APK
-        script: ./gradlew assembleDebug --stacktrace
+      - name: Build Debug APK
+        script: |
+          set -e
+          ./gradlew assembleDebug --stacktrace 2>&1
 
     artifacts:
       - app/build/outputs/apk/debug/app-debug.apk
