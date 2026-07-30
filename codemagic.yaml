@@ -8,6 +8,15 @@ workflows:
       java: 17
 
     scripts:
+      - name: Generate Gradle Wrapper (if missing)
+        script: |
+          if [ ! -f "gradlew" ]; then
+            echo "gradlew not found — generating via gradle wrapper task..."
+            gradle wrapper --gradle-version 8.6 --distribution-type bin
+          else
+            echo "gradlew already exists."
+          fi
+
       - name: Set gradlew executable permission
         script: chmod +x gradlew
 
@@ -20,7 +29,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - YOUR_EMAIL@gmail.com
+          - mrfake2340@gmail.com
         notify:
           success: true
           failure: true
