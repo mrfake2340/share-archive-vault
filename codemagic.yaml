@@ -18,21 +18,21 @@ workflows:
             cp -r share-archive-vault/. .
           fi
 
-      - name: Setup Gradle Wrapper
+      - name: Setup Gradle
         script: |
           set -e
-          if [ -f "gradlew" ]; then
-            echo "gradlew found!"
-            chmod +x gradlew
-          else
-            echo "gradlew not found, generating wrapper..."
-            gradle wrapper
-            chmod +x gradlew
-          fi
+          echo "Downloading and installing Gradle 8.2 directly..."
+          curl -sL https://services.gradle.org/distributions/gradle-8.2-bin.zip -o gradle-8.2-bin.zip
+          unzip -q gradle-8.2-bin.zip
+          export PATH=$PWD/gradle-8.2/bin:$PATH
+          echo "Generating wrapper JAR..."
+          gradle wrapper
+          chmod +x gradlew
 
       - name: Build Debug APK
         script: |
           set -e
+          export PATH=$PWD/gradle-8.2/bin:$PATH
           ./gradlew assembleDebug --stacktrace
 
     artifacts:
