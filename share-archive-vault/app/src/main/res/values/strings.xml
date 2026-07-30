@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Share Archive Vault</string>
+
+    <!-- Tabs -->
+    <string name="tab_photos">Photos</string>
+    <string name="tab_videos">Videos</string>
+
+    <!-- Idle screen -->
+    <string name="idle_title">Share Archive Vault</string>
+    <string name="idle_subtitle">Open this app from the Share Sheet\nwhen exporting a WhatsApp chat.\n\nGo to WhatsApp → Chat → Export Chat\n→ Include Media → Share → Share Archive Vault</string>
+
+    <!-- Status -->
+    <string name="files_found">%d files found · duplicates removed</string>
+    <string name="no_media_found">No photos or videos found in this ZIP.</string>
+
+    <!-- Actions -->
+    <string name="select_all">Select All</string>
+    <string name="deselect_all">Deselect All</string>
+    <string name="share_selected">Share Selected</string>
+    <string name="share_via">Share via…</string>
+
+    <!-- Prompts / Errors -->
+    <string name="select_files_prompt">Please select at least one file to share.</string>
+    <string name="share_error">Could not prepare files for sharing.</string>
+    <string name="no_photos">No photos in this archive.</string>
+    <string name="no_videos">No videos in this archive.</string>
+
+    <!-- File provider authority -->
+    <string name="file_provider_authority" translatable="false">com.sharearchivevault.fileprovider</string>
+</resources>

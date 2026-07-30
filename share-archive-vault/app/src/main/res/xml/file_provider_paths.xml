@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    FileProvider paths configuration.
+    Maps the app's internal cache directory so extracted files can be
+    shared with other apps via content:// URIs without exposing raw file paths.
+-->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Covers getCacheDir() / vault_extract/ -->
+    <cache-path
+        name="vault_cache"
+        path="vault_extract/" />
+</paths>

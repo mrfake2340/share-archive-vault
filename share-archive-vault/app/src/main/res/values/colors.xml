@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark theme palette -->
+    <color name="bg_dark">#0F0F0F</color>
+    <color name="surface_dark">#1A1A1A</color>
+    <color name="surface_elevated">#242424</color>
+
+    <!-- Accent: Teal -->
+    <color name="accent_teal">#00BFA5</color>
+    <color name="accent_teal_dark">#008C76</color>
+
+    <!-- Text -->
+    <color name="white">#FFFFFF</color>
+    <color name="text_primary">#EFEFEF</color>
+    <color name="text_secondary">#888888</color>
+
+    <!-- Selection overlay (semi-transparent teal) -->
+    <color name="selection_overlay">#6600BFA5</color>
+
+    <!-- Status bar -->
+    <color name="status_bar">#0A0A0A</color>
+</resources>

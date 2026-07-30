@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Teal shield/vault icon centered for adaptive icon -->
+    <path
+        android:fillColor="#00BFA5"
+        android:pathData="M54,18 L30,28 L30,50 C30,64.4 40.4,77.9 54,82 C67.6,77.9 78,64.4 78,50 L78,28 Z" />
+    <path
+        android:fillColor="#0F0F0F"
+        android:pathData="M46,46 L46,42 C46,37.6 49.6,34 54,34 C58.4,34 62,37.6 62,42 L62,46 L64,46 C65.1,46 66,46.9 66,48 L66,60 C66,61.1 65.1,62 64,62 L44,62 C42.9,62 42,61.1 42,60 L42,48 C42,46.9 42.9,46 44,46 Z M58,46 L50,46 L50,42 C50,39.8 51.8,38 54,38 C56.2,38 58,39.8 58,42 Z M54,52 C52.9,52 52,52.9 52,54 C52,55.1 52.9,56 54,56 C55.1,56 56,55.1 56,54 C56,52.9 55.1,52 54,52 Z" />
+</vector>
