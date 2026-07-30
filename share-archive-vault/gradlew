@@ -23,7 +23,7 @@ while
 do
     ls=$( ls -ld "$app_path" )
     link=${ls#*' -> '}
-    case $link in             #(
+    case $link in              #(
       /*)   app_path=$link ;; #( absolute
       *)    app_path=$APP_HOME$link ;; #( relative
     esac
@@ -34,7 +34,7 @@ APP_NAME="Gradle"
 APP_BASE_NAME=${0##*/}
 
 # Add default JVM options here.
-DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
+DEFAULT_JVM_OPTS="-Xmx512m -Xms256m"
 
 # Use the maximum available, or set MAX_FD != -1 to use that value.
 MAX_FD=maximum
@@ -55,7 +55,7 @@ cygwin=false
 msys=false
 darwin=false
 nonstop=false
-case "$( uname )" in              #(
+case "$( uname )" in               #(
   CYGWIN* )         cygwin=true  ;; #(
   Darwin* )         darwin=true  ;; #(
   MSYS* | MINGW* )  msys=true    ;; #(
