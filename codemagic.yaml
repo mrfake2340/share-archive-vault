@@ -6,24 +6,19 @@ workflows:
 
     environment:
       java: 17
+      vars:
+        # মেমোরি ফ্ল্যাগ আলাদা ভ্যারিয়েবলে নিরাপদভাবে সেট করা হয়েছে
+        GRADLE_OPTS: "-Dorg.gradle.jvmargs='-Xmx2048m -XX:MaxMetaspaceSize=512m'"
 
     scripts:
       - name: Diagnose project structure
         script: |
           echo "=== Current directory ==="
           pwd
-          echo ""
-          echo "=== Files at root ==="
           ls -la
-          echo ""
-          echo "=== Checking for nested folder ==="
           if [ -d "share-archive-vault" ]; then
-            echo "Found nested share-archive-vault folder — moving into it..."
+            echo "Moving files from nested directory..."
             cp -r share-archive-vault/. .
-            echo "Files after copy:"
-            ls -la
-          else
-            echo "No nested folder. Files are at root — OK."
           fi
 
       - name: Setup Gradle Wrapper
@@ -33,26 +28,18 @@ workflows:
             echo "gradlew found!"
             chmod +x gradlew
           else
-            echo "gradlew NOT found. Downloading Gradle 8.6 binary directly..."
-            curl -L https://services.gradle.org/distributions/gradle-8.6-bin.zip -o gradle-8.6-bin.zip
-            unzip -q gradle-8.6-bin.zip
-            export GRADLE_HOME=$PWD/gradle-8.6
-            export PATH=$PATH:$GRADLE_HOME/bin
-            echo "Generating wrapper..."
-            gradle wrapper --gradle-version 8.6 --distribution-type bin
+            echo "gradlew not found, using global gradle to wrapper..."
+            gradle wrapper
             chmod +x gradlew
-            echo "Wrapper created successfully!"
           fi
-          echo "=== Gradle version ==="
-          ./gradlew --version
 
       - name: Build Debug APK
         script: |
           set -e
-          ./gradlew assembleDebug --stacktrace 2>&1
+          ./gradlew assembleDebug --stacktrace
 
     artifacts:
-      - app/build/outputs/apk/debug/app-debug.apk
+      - app/build/outputs/apk/debug/*.apk
 
     publishing:
       email:
