@@ -1,0 +1,26 @@
+workflows:
+  android-debug-build:
+    name: Share Archive Vault - Debug Build
+    max_build_duration: 30
+    instance_type: mac_mini_m2
+
+    environment:
+      java: 17
+
+    scripts:
+      - name: Set gradlew executable permission
+        script: chmod +x gradlew
+
+      - name: Build debug APK
+        script: ./gradlew assembleDebug --stacktrace
+
+    artifacts:
+      - app/build/outputs/apk/debug/app-debug.apk
+
+    publishing:
+      email:
+        recipients:
+          - YOUR_EMAIL@gmail.com
+        notify:
+          success: true
+          failure: true
